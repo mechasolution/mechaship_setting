@@ -36,11 +36,11 @@ pip3 install -U argcomplete
 pip install setuptools==45.2.0
 sudo apt install python3-colcon-common-extensions
 bashrc=$(tail ~/.bashrc)
-if [ $(expr "$bashrc" : ".*alias cb='cd ~/ros2_ws && colcon build --symlink-install'") -ne 0 ]; then
+if [ $(expr "$bashrc" : ".*alias cb='cd ~/ros2_ws && colcon build --symlink-install && source ~/ros2_ws/install/local_setup.bash'") -ne 0 ]; then
   echo "단축 명령어 cb 등록 확인"
 else
   echo "단축 명령어 cb 등록"
-  echo "alias cb='cd ~/ros2_ws && colcon build --symlink-install'" >> ~/.bashrc
+  echo "alias cb='cd ~/ros2_ws && colcon build --symlink-install && source ~/ros2_ws/install/local_setup.bash'" >> ~/.bashrc
 fi
 
 echo "\n################################################################"
