@@ -59,13 +59,13 @@ else
 fi
 
 echo "\n################################################################"
-echo "Namespace 및 시리얼 포트 접근 권한 설정"
+echo "도메인 아이디 및 시리얼 포트 접근 권한 설정"
 echo "################################################################"
-if [ $ROS_NAMESPACE ]; then
-  echo "Namespace 등록 확인"
+if [ $ROS_DOMAIN_ID ]; then
+  echo "ROS_DOMAIN_ID 등록 확인"
 else
-  echo "Namespace 등록"
-  echo "export ROS_NAMESPACE=team_mecha" >> ~/.bashrc
+  echo "ROS_DOMAIN_ID 등록"
+  echo "export ROS_DOMAIN_ID=0" >> ~/.bashrc
 fi
 sudo adduser $USER dialout
 
