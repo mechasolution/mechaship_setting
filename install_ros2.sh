@@ -70,6 +70,13 @@ source install/local_setup.bash
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
 source install/local_setup.sh
+bashrc=$(tail ~/.bashrc)
+if [ $(expr "$bashrc" : ".*source ~/uros_ws/install/local_setup.bash") -ne 0 ]; then
+  echo "uros_ws setup.bash 등록 확인"
+else
+  echo "uros_ws setup.bash 등록"
+  echo "source ~/uros_ws/install/local_setup.bash" >> ~/.bashrc
+fi
 
 echo "\n################################################################"
 echo "도메인 아이디 및 시리얼 포트 접근 권한 설정"
