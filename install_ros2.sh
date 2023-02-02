@@ -31,8 +31,8 @@ fi
 echo "\n################################################################"
 echo "colcon 빌드툴 및 기타 소프트웨어 설치"
 echo "################################################################"
-sudo apt install -y python3-pip python3-rosdep2
-pip3 install -U argcomplete xacro
+sudo apt install -y python3-pip python3-rosdep2 ros-foxy-xacro
+pip3 install -U argcomplete
 pip install setuptools==45.2.0
 sudo apt install python3-colcon-common-extensions
 bashrc=$(tail ~/.bashrc)
