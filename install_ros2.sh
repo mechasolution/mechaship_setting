@@ -34,7 +34,7 @@ echo "################################################################"
 sudo apt install -y python3-pip python3-rosdep2 ros-foxy-xacro
 pip3 install -U argcomplete
 pip install setuptools==45.2.0
-sudo apt install python3-colcon-common-extensions
+sudo apt install -y python3-colcon-common-extensions
 bashrc=$(tail ~/.bashrc)
 if [ $(expr "$bashrc" : ".*alias cb='cd ~/ros2_ws && colcon build --symlink-install && source ~/ros2_ws/install/local_setup.bash'") -ne 0 ]; then
   echo "단축 명령어 cb 등록 확인"
