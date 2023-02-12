@@ -59,26 +59,6 @@ else
 fi
 
 echo "\n################################################################"
-echo "micro-ros 설치"
-echo "################################################################"
-cd ~/
-mkdir uros_ws && cd uros_ws
-git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
-rosdep update && rosdep install --from-paths src --ignore-src -y
-colcon build
-source install/local_setup.bash
-ros2 run micro_ros_setup create_agent_ws.sh
-ros2 run micro_ros_setup build_agent.sh
-source install/local_setup.sh
-bashrc=$(tail ~/.bashrc)
-if [ $(expr "$bashrc" : ".*source ~/uros_ws/install/local_setup.bash") -ne 0 ]; then
-  echo "uros_ws setup.bash 등록 확인"
-else
-  echo "uros_ws setup.bash 등록"
-  echo "source ~/uros_ws/install/local_setup.bash" >> ~/.bashrc
-fi
-
-echo "\n################################################################"
 echo "도메인 아이디 및 시리얼 포트 접근 권한 설정"
 echo "################################################################"
 if [ $ROS_DOMAIN_ID ]; then
@@ -90,37 +70,5 @@ fi
 sudo adduser $USER dialout
 
 echo "\n################################################################"
-echo "udev rules 설정"
+echo "실행 완료, 터미널을 닫고 다시 열어주세요."
 echo "################################################################"
-echo "MCU : /dev/ttyTHS1 to /dev/ttyMCU :"
-if [ -f "/etc/udev/rules.d/98-mechaship-mcu" ]; then
-    echo "98-mechaship-mcu file already exist."
-else 
-    echo 'KERNEL=="ttyTHS1", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyMCU"' |  sudo tee /etc/udev/rules.d/98-mechaship-mcu.rules > /dev/null  
-    echo '98-mechaship-mcu created'
-fi
-
-echo ""
-echo "YD LiDAR (USB Serial) : /dev/ttyUSBx to /dev/ttyLiDAR :"
-if [ -f "/etc/udev/rules.d/97-mechaship-lidar.rules" ]; then
-    echo "97-mechaship-lidar.rules file already exist."
-else 
-    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout",  SYMLINK+="ttyLiDAR"' | sudo tee /etc/udev/rules.d/97-mechaship-lidar.rules > /dev/null
-    
-    echo '97-mechaship-lidar.rules created'
-fi
-
-systemctl stop nvgetty
-systemctl disable nvgetty
-
-echo ""
-echo "Reload rules"
-echo ""
-sudo udevadm control --reload-rules
-sudo udevadm trigger
-
-echo "\n################################################################"
-echo "실행 완료"
-echo "################################################################"
-
-source ~/.bashrc
