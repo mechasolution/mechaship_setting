@@ -28,6 +28,7 @@ echo "################################################################"
 pip install pandas==1.1.4
 pip install matplotlib==3.2.2
 sed -i "s/opencv-python/#opencv-python/" ~/yolov5/requirements.txt
+sed -i "s/setuptools/#setuptools/" ~/yolov5/requirements.txt
 pip install -r ~/yolov5/requirements.txt
 
 
